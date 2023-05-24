@@ -23,7 +23,7 @@ COMMENT ON COLUMN lojas.produtos.imagem IS 'Coluna com as imagens dos produtos.'
 COMMENT ON COLUMN lojas.produtos.imagem_mime_type IS 'Coluna com identificador de mídia da imagem.';
 COMMENT ON COLUMN lojas.produtos.imagem_arquivo IS 'Coluna com os tipos de arquivos que a as imagens estão. ';
 COMMENT ON COLUMN lojas.produtos.imagem_charset IS 'Coluna com o charset das imagens.';
-COMMENT ON COLUMN lojas.produtos.imagem_ultima-atualizacao IS 'Coluna com a data da ultima atualização da imagem do produto.';
+COMMENT ON COLUMN lojas.produtos.imagem_ultima_atualizacao IS 'Coluna com a data da ultima atualização da imagem do produto.';
 
 
 CREATE TABLE lojas.lojas (
