@@ -1,22 +1,25 @@
 -- Apagando SCHEMAS criados com o mesmo nome caso existam / Banco de dados com mesmo nome caso existam / usuários com mesmo nome caso existam--
- --
+
  DROP SCHEMA lojas CASCADE;
  DROP DATABASE IF EXISTS uvv;
- DROP user giovanni
+ DROP USER giovanni
+ 
  -- Criação do usuário que irá manipular o banco de dados lojas--
- CREATE USER giovanni WITH
+ create  USER giovanni WITH
  ENCRYPTED PASSWORD 'psete'
  CREATEDB CREATEROLE login;
+
 --Criação do Banco de Dados UVV--
   CREATE DATABASE uvv
   OWNER = giovanni
   TEMPLATE = template0
-  ENCONDING = UTF8
+  encoding = UTF8
   LC_COLLATE = 'pt_BR.UTF-8'
-  LC_type = 'pt_BR.UTF-8'
-  ALLOW CONECTIONS = true;
+  LC_CTYPE = 'pt_BR.UTF-8'
+  ALLOW_CONNECTIONS = true;
  
- \c "host=localhost dbname=uvv user=giovanni password=psete"
+  \c "host=localhost dbname=uvv user=giovanni password=psete"
+  
  --Criação da SCHEMA e alterando ela para o OWNER giovanni--
   CREATE SCHEMA lojas;
   ALTER SCHEMA lojas OWNER TO giovanni;
@@ -220,4 +223,4 @@ ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
 
-                
+               
