@@ -95,7 +95,9 @@ CREATE TABLE lojas.envios (
                 endereço_entrega VARCHAR(512) NOT NULL,
                 status VARCHAR(15) NOT NULL,
                 CONSTRAINT envio_id PRIMARY KEY (envio_id)
-                CONSTRAIT status_pedido CHECK (status IN ('ENVIADO', 'ENTREGUE', 'REEMBOLSADO','CANCELADO'))
+                CONSTRAINT fk_envios_lojas FOREIGN KEY (loja_id) REFERENCES lojas.lojas (loja_id) ON DELETE NO ACTION ON UPDATE NO ACTION,
+                CONSTRAINT fk_envios_clientes FOREIGN KEY (cliente_id) REFERENCES lojas.clientes (cliente_id) ON DELETE NO ACTION ON UPDATE NO ACTION,
+                CONSTRAINT chk_envios_status CHECK (status IN ('ENVIADO', 'ENTREGUE', 'DEVOLVIDO', 'CANCELADO'))
 );
 COMMENT ON TABLE lojas.envios IS 'Tabela com as informações dos envios que as lojas fizeram para os clientes.';
 COMMENT ON COLUMN lojas.envios.envio_id IS 'Coluna com ID identificador do envio que a loja fez.';
@@ -112,12 +114,13 @@ CREATE TABLE lojas.pedidos (
                 status VARCHAR(15) NOT NULL,
                 loja_id NUMERIC(38) NOT NULL,
                 CONSTRAINT cliente_id PRIMARY KEY (pedido_id)
+                CONSTRAINT status_pedido CHECK (status IN ('COMPLETO','REEMBOLSADO',"ESPERANDO_PAGAMENTO'))
 );
 COMMENT ON TABLE lojas.pedidos IS 'Tabela com as informações dos pedidos dos clientes e das lojas utilizadas.';
 COMMENT ON COLUMN lojas.pedidos.pedido_id IS 'Primary key da coluna, com objetivo de identificar o ID do pedido.';
 COMMENT ON COLUMN lojas.pedidos.data_hora IS 'Coluna com a data e hora da realizaçao do pedido ';
 COMMENT ON COLUMN lojas.pedidos.cliente_id IS 'Coluna que é a primary key da tabela, com o ID dos clientes da loja';
-COMMENT ON COLUMN lojas.pedidos.status IS 'Coluna com os status do pedido';
+COMMENT ON COLUMN lojas.pedidos.status_pedido IS 'Coluna com os status do pedido';
 COMMENT ON COLUMN lojas.pedidos.loja_id IS 'Coluna com o ID de identificação das lojas.';
 
 
