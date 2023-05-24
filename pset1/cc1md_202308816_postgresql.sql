@@ -1,9 +1,26 @@
- CREATE USER Giovanni;
- CREATE DATABASE UVV;
- CREATE SCHEMA lojas;
-
- ALTER SCHEMA lojas OWNER TO Giovanni;
-
+-- Apagando SCHEMAS criados com o mesmo nome caso existam / Banco de dados com mesmo nome caso existam / usuários com mesmo nome caso existam--
+ --
+ DROP SCHEMA lojas CASCADE;
+ DROP DATABASE IF EXISTS uvv;
+ DROP user giovanni
+ -- Criação do usuário que irá manipular o banco de dados lojas--
+ CREATE USER giovanni WITH
+ ENCRYPTED PASSWORD 'psete'
+ CREATEDB CREATEROLE login;
+--Criação do Banco de Dados UVV--
+  CREATE DATABASE uvv
+  OWNER = giovanni
+  TEMPLATE = template0
+  ENCONDING = UTF8
+  LC_COLLATE = 'pt_BR.UTF-8'
+  LC_type = 'pt_BR.UTF-8'
+  ALLOW CONECTIONS = true;
+ 
+ \c "host=localhost dbname=uvv user=giovanni password=psete"
+ --Criação da SCHEMA e alterando ela para o OWNER giovanni--
+  CREATE SCHEMA lojas;
+  ALTER SCHEMA lojas OWNER TO giovanni;
+  --Criação da tabela produtos, tendo comentários sobre a tabela e sobre as colunas--
  CREATE TABLE lojas.produtos (
     produto_id NUMERIC(38) NOT NULL,
     nome VARCHAR(255) NOT NULL,
@@ -26,7 +43,7 @@ COMMENT ON COLUMN lojas.produtos.imagem_mime_type IS 'Coluna com identificador d
 COMMENT ON COLUMN lojas.produtos.imagem_arquivo IS 'Coluna com os tipos de arquivos que as imagens estão.';
 COMMENT ON COLUMN lojas.produtos.imagem_charset IS 'Coluna com o charset das imagens.';
 COMMENT ON COLUMN lojas.produtos.imagem_ultima_atualizacao IS 'Coluna com a data da última atualização da imagem do produto.';
-
+ --Criação das tabelas lojas com comentários sobre as colunas e a tabela em si--
  CREATE TABLE lojas.lojas (
     loja_id NUMERIC(38) NOT NULL,
     nome VARCHAR(255) NOT NULL,
@@ -53,9 +70,7 @@ COMMENT ON COLUMN lojas.lojas.logo_mime_type IS 'Coluna com a identificação da
 COMMENT ON COLUMN lojas.lojas.logo_arquivo IS 'Coluna com o tipo de arquivo da logo.';
 COMMENT ON COLUMN lojas.lojas.logo_charset IS 'Coluna com o charset da logo.';
 COMMENT ON COLUMN lojas.lojas.logo_ultima_atualizacao IS 'Coluna com a data da última atualização da logo.';
-
-
-
+ --Criação da tabela estoques com comentários das colunas e da tabela--
 CREATE TABLE lojas.estoques (
                 estoque_id NUMERIC(38) NOT NULL,
                 loja_id NUMERIC(38) NOT NULL,
@@ -69,7 +84,7 @@ COMMENT ON COLUMN lojas.estoques.loja_id IS 'Coluna com o ID de identificação 
 COMMENT ON COLUMN lojas.estoques.produto_id IS 'Coluna com o ID identificador dos produtos.';
 COMMENT ON COLUMN lojas.estoques.quantidade IS 'Coluna que mostra informação da quantidade de estoque.';
 
-
+ --Criação da tabela clientes com comentários das colunas e da tabela--
  CREATE TABLE lojas.clientes (
                 cliente_id NUMERIC(38) NOT NULL,
                 email VARCHAR(255) NOT NULL,
@@ -87,7 +102,7 @@ COMMENT ON COLUMN lojas.clientes.telefone IS 'Coluna com os números de telefone
 COMMENT ON COLUMN lojas.clientes.telefone2 IS 'Coluna com os segundos números de telefone dos clientes para meio de contato';
 COMMENT ON COLUMN lojas.clientes.telefone3 IS 'Coluna com o terceiro número de contato com o cliente.';
 
-
+  --Criação da tabela de envios com os comentários da coluna e da tabela--
  CREATE TABLE lojas.envios (
                 envio_id NUMERIC(38) NOT NULL,
                 loja_id NUMERIC(38) NOT NULL,
@@ -106,7 +121,7 @@ COMMENT ON COLUMN lojas.envios.cliente_id IS 'Coluna que é a primary key da tab
 COMMENT ON COLUMN lojas.envios.endereco_entrega IS 'Coluna com as informações dos endereços que devem ser entregues os pedidos.';
 COMMENT ON COLUMN lojas.envios.status_pedido IS 'Coluna com os status dos envios.';
 
-
+ --Criação da tabela de pedidos com o comentário da tabela e das colunas--
  CREATE TABLE lojas.pedidos (
                 pedido_id NUMERIC(38) NOT NULL,
                 data_hora TIMESTAMP NOT NULL,
@@ -114,16 +129,16 @@ COMMENT ON COLUMN lojas.envios.status_pedido IS 'Coluna com os status dos envios
                 status VARCHAR(15) NOT NULL,
                 loja_id NUMERIC(38) NOT NULL,
                 CONSTRAINT cliente_id PRIMARY KEY (pedido_id)
-                CONSTRAINT status_pedido CHECK (status IN ('COMPLETO','REEMBOLSADO',"ESPERANDO_PAGAMENTO'))
+                CONSTRAINT status_pedido CHECK (status IN ('COMPLETO','REEMBOLSADO','ESPERANDO_PAGAMENTO'))
 );
+
 COMMENT ON TABLE lojas.pedidos IS 'Tabela com as informações dos pedidos dos clientes e das lojas utilizadas.';
 COMMENT ON COLUMN lojas.pedidos.pedido_id IS 'Primary key da coluna, com objetivo de identificar o ID do pedido.';
 COMMENT ON COLUMN lojas.pedidos.data_hora IS 'Coluna com a data e hora da realizaçao do pedido ';
 COMMENT ON COLUMN lojas.pedidos.cliente_id IS 'Coluna que é a primary key da tabela, com o ID dos clientes da loja';
 COMMENT ON COLUMN lojas.pedidos.status_pedido IS 'Coluna com os status do pedido';
 COMMENT ON COLUMN lojas.pedidos.loja_id IS 'Coluna com o ID de identificação das lojas.';
-
-
+ --Criação da tabela pedidos_itens com os comentários da tabela e das colunas--
  CREATE TABLE lojas.pedidos_itens (
                 pedido_id NUMERIC(38) NOT NULL,
                 produto_id NUMERIC(38) NOT NULL,
@@ -141,63 +156,63 @@ COMMENT ON COLUMN lojas.pedidos_itens.preco_unitario IS 'Coluna com o preço dos
 COMMENT ON COLUMN lojas.pedidos_itens.quantidade IS 'Coluna com a quantidade de itens pedidos.';
 COMMENT ON COLUMN lojas.pedidos_itens.envio_id IS 'Coluna com ID identificador do envio que a loja fez.';
 
-
+--A FK produto_id foi adicionada na tabela de pedidos_itens
 ALTER TABLE lojas.pedidos_itens ADD CONSTRAINT produtos_pedidos_itens_fk
 FOREIGN KEY (produto_id)
 REFERENCES lojas.produtos (produto_id)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
-
+--A FK do produto_id foi adicionada na tabela de estoques--
 ALTER TABLE lojas.estoques ADD CONSTRAINT produtos_estoques_fk
 FOREIGN KEY (produto_id)
 REFERENCES lojas.produtos (produto_id)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
-
+--A FK loja_id foi adicionada na tabela pedidos--
 ALTER TABLE lojas.pedidos ADD CONSTRAINT lojas_pedidos_fk
 FOREIGN KEY (loja_id)
 REFERENCES lojas.lojas (loja_id)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
-
+--A FK loja_id foi adicionada na tabela envios--
 ALTER TABLE lojas.envios ADD CONSTRAINT lojas_envios_fk
 FOREIGN KEY (loja_id)
 REFERENCES lojas.lojas (loja_id)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
-
+--A Fk loja_id foi adicionada na tabela estoques
 ALTER TABLE lojas.estoques ADD CONSTRAINT lojas_estoques_fk
 FOREIGN KEY (loja_id)
 REFERENCES lojas (loja_id)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
-
+--A FK cliente_id foi adicionada na tabela pedidos--
 ALTER TABLE lojas.pedidos ADD CONSTRAINT clientes_pedidos_fk
 FOREIGN KEY (cliente_id)
 REFERENCES lojas.clientes (cliente_id)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
-
+--A FK envios foi adicionada na tabela envios--
 ALTER TABLE lojas.envios ADD CONSTRAINT clientes_envios_fk
 FOREIGN KEY (cliente_id)
 REFERENCES lojas.clientes (cliente_id)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
-
+--A Fk envio_id foi adicionada na tabela pedidos_itens--
 ALTER TABLE lojas.pedidos_itens ADD CONSTRAINT envios_pedidos_itens_fk
 FOREIGN KEY (envio_id)
 REFERENCES lojas.envios (envio_id)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
-
+--A Fk pedido_id foi adicionada na tabela pedidos_itens
 ALTER TABLE lojas.pedidos_itens ADD CONSTRAINT pedidos_pedidos_itens_fk
 FOREIGN KEY (pedido_id)
 REFERENCES lojas.pedidos (pedido_id)
@@ -205,3 +220,4 @@ ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
 
+                
