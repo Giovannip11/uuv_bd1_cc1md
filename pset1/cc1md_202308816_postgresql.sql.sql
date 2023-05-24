@@ -167,7 +167,7 @@ NOT DEFERRABLE;
 
 ALTER TABLE lojas.estoques ADD CONSTRAINT lojas_estoques_fk
 FOREIGN KEY (loja_id)
-REFERENCES lojas.lojas (loja_id)
+REFERENCES lojas (loja_id)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
