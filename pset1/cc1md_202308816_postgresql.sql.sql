@@ -54,9 +54,6 @@ COMMENT ON COLUMN lojas.lojas.logo_arquivo IS 'Coluna com o tipo de arquivo da l
 COMMENT ON COLUMN lojas.lojas.logo_charset IS 'Coluna com o charset da logo.';
 COMMENT ON COLUMN lojas.lojas.logo_ultima_atualizacao IS 'Coluna com a data da última atualização da logo.';
 
-CREATE TABLE lojas.estoques (
-    estoque_id NUMERIC(
-
 
 
 CREATE TABLE lojas.estoques (
