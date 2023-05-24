@@ -1,10 +1,10 @@
-CREATE USER Giovanni;
-CREATE DATABASE UVV;
-CREATE SCHEMA lojas;
+ CREATE USER Giovanni;
+ CREATE DATABASE UVV;
+ CREATE SCHEMA lojas;
 
-ALTER SCHEMA lojas OWNER TO Giovanni;
+ ALTER SCHEMA lojas OWNER TO Giovanni;
 
-CREATE TABLE lojas.produtos (
+ CREATE TABLE lojas.produtos (
     produto_id NUMERIC(38) NOT NULL,
     nome VARCHAR(255) NOT NULL,
     preco_unitario NUMERIC(10,2),
@@ -27,7 +27,7 @@ COMMENT ON COLUMN lojas.produtos.imagem_arquivo IS 'Coluna com os tipos de arqui
 COMMENT ON COLUMN lojas.produtos.imagem_charset IS 'Coluna com o charset das imagens.';
 COMMENT ON COLUMN lojas.produtos.imagem_ultima_atualizacao IS 'Coluna com a data da última atualização da imagem do produto.';
 
-CREATE TABLE lojas.lojas (
+ CREATE TABLE lojas.lojas (
     loja_id NUMERIC(38) NOT NULL,
     nome VARCHAR(255) NOT NULL,
     endereco_web VARCHAR(100),
@@ -70,7 +70,7 @@ COMMENT ON COLUMN lojas.estoques.produto_id IS 'Coluna com o ID identificador do
 COMMENT ON COLUMN lojas.estoques.quantidade IS 'Coluna que mostra informação da quantidade de estoque.';
 
 
-CREATE TABLE lojas.clientes (
+ CREATE TABLE lojas.clientes (
                 cliente_id NUMERIC(38) NOT NULL,
                 email VARCHAR(255) NOT NULL,
                 nome VARCHAR(255) NOT NULL,
@@ -88,7 +88,7 @@ COMMENT ON COLUMN lojas.clientes.telefone2 IS 'Coluna com os segundos números d
 COMMENT ON COLUMN lojas.clientes.telefone3 IS 'Coluna com o terceiro número de contato com o cliente.';
 
 
-CREATE TABLE lojas.envios (
+ CREATE TABLE lojas.envios (
                 envio_id NUMERIC(38) NOT NULL,
                 loja_id NUMERIC(38) NOT NULL,
                 cliente_id NUMERIC(38) NOT NULL,
@@ -107,7 +107,7 @@ COMMENT ON COLUMN lojas.envios.endereco_entrega IS 'Coluna com as informações 
 COMMENT ON COLUMN lojas.envios.status_pedido IS 'Coluna com os status dos envios.';
 
 
-CREATE TABLE lojas.pedidos (
+ CREATE TABLE lojas.pedidos (
                 pedido_id NUMERIC(38) NOT NULL,
                 data_hora TIMESTAMP NOT NULL,
                 cliente_id NUMERIC(38) NOT NULL,
@@ -124,7 +124,7 @@ COMMENT ON COLUMN lojas.pedidos.status_pedido IS 'Coluna com os status do pedido
 COMMENT ON COLUMN lojas.pedidos.loja_id IS 'Coluna com o ID de identificação das lojas.';
 
 
-CREATE TABLE lojas.pedidos_itens (
+ CREATE TABLE lojas.pedidos_itens (
                 pedido_id NUMERIC(38) NOT NULL,
                 produto_id NUMERIC(38) NOT NULL,
                 numero_da_linha NUMERIC(38) NOT NULL,
