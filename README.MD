@@ -6,5 +6,5 @@
 - MONITORA:
 ## Descrição:
 PESET é uma atividade pontuada com questões e projetos envolvendo a construção de Banco de Dados.
-##pset1
+## pset1
 pset1 é o diretório onde está localizado o script do pset sendo ele >
