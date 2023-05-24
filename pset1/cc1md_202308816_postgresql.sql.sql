@@ -30,8 +30,8 @@ COMMENT ON COLUMN lojas.produtos.imagem_ultima_atualizacao IS 'Coluna com a data
 CREATE TABLE lojas.lojas (
                 loja_id NUMERIC(38) NOT NULL,
                 nome VARCHAR(255) NOT NULL,
-                endereço_web VARCHAR(100),
-                endereço_fisico VARCHAR(512),
+                endereco_web VARCHAR(100),
+                endereco_fisico VARCHAR(512),
                 latitude NUMERIC,
                 longitude NUMERIC,
                 logo BYTEA,
@@ -44,8 +44,8 @@ CREATE TABLE lojas.lojas (
 COMMENT ON TABLE lojas.lojas IS 'Tabela com informaçoes das lojas';
 COMMENT ON COLUMN lojas.lojas.loja_id IS 'Coluna com o ID de identificação das lojas.';
 COMMENT ON COLUMN lojas.lojas.nome IS 'Coluna com o nome das lojas.';
-COMMENT ON COLUMN lojas.lojas.endereço_web IS 'Coluna com infomação do endereço de web da loja.';
-COMMENT ON COLUMN lojas.lojas.endereço_fisico IS 'Coluna com informações do endereço físico da loja.';
+COMMENT ON COLUMN lojas.lojas.endereco_web IS 'Coluna com infomação do endereço de web da loja.';
+COMMENT ON COLUMN lojas.lojas.endereco_fisico IS 'Coluna com informações do endereço físico da loja.';
 COMMENT ON COLUMN lojas.sql.lojas.latitude IS 'Coluna com informação da posição de latitude da loja.';
 COMMENT ON COLUMN lojas.lojas.longitude IS 'Coluna com informação da posição de longitude da loja.';
 COMMENT ON COLUMN lojas.lojas.logo IS 'Coluna com a logo da loja.';
@@ -94,13 +94,14 @@ CREATE TABLE lojas.envios (
                 endereço_entrega VARCHAR(512) NOT NULL,
                 status VARCHAR(15) NOT NULL,
                 CONSTRAINT envio_id PRIMARY KEY (envio_id)
+                CONSTRAIT status_pedido CHECK (status IN ('ENVIADO', 'ENTREGUE', 'REEMBOLSADO','CANCELADO'))
 );
 COMMENT ON TABLE lojas.envios IS 'Tabela com as informações dos envios que as lojas fizeram para os clientes.';
 COMMENT ON COLUMN lojas.envios.envio_id IS 'Coluna com ID identificador do envio que a loja fez.';
 COMMENT ON COLUMN lojas.envios.loja_id IS 'Coluna com o ID de identificação das lojas.';
 COMMENT ON COLUMN lojas.envios.cliente_id IS 'Coluna que é a primary key da tabela, com o ID dos clientes da loja';
-COMMENT ON COLUMN lojas.envios.endereço_entrega IS 'Coluna com as informações dos endereços que devem ser entregues os pedidos.';
-COMMENT ON COLUMN lojas.envios.status IS 'Coluna com os status dos envios.';
+COMMENT ON COLUMN lojas.envios.endereco_entrega IS 'Coluna com as informações dos endereços que devem ser entregues os pedidos.';
+COMMENT ON COLUMN lojas.envios.status_pedido IS 'Coluna com os status dos envios.';
 
 
 CREATE TABLE lojas.pedidos (
@@ -123,7 +124,7 @@ CREATE TABLE lojas.pedidos_itens (
                 pedido_id NUMERIC(38) NOT NULL,
                 produto_id NUMERIC(38) NOT NULL,
                 numero_da_linha NUMERIC(38) NOT NULL,
-                preço_unitario NUMERIC(10,2) NOT NULL,
+                preco_unitario NUMERIC(10,2) NOT NULL,
                 quantidade NUMERIC(38) NOT NULL,
                 envio_id NUMERIC(38) NOT NULL,
                 CONSTRAINT pedido_id PRIMARY KEY (pedido_id, produto_id)
@@ -132,7 +133,7 @@ COMMENT ON TABLE lojas.pedidos_itens IS 'Tabela com os pedidos dos itens.';
 COMMENT ON COLUMN lojas.pedidos_itens.pedido_id IS 'Primary key da coluna, com objetivo de identificar o ID do pedido.';
 COMMENT ON COLUMN lojas.pedidos_itens.produto_id IS 'Coluna com o ID identificador dos produtos.';
 COMMENT ON COLUMN lojas.pedidos_itens.numero_da_linha IS 'Coluna com os números da linha do pedido.';
-COMMENT ON COLUMN lojas.pedidos_itens.preço_unitario IS 'Coluna com o preço dos preços dos pedidos.';
+COMMENT ON COLUMN lojas.pedidos_itens.preco_unitario IS 'Coluna com o preço dos preços dos pedidos.';
 COMMENT ON COLUMN lojas.pedidos_itens.quantidade IS 'Coluna com a quantidade de itens pedidos.';
 COMMENT ON COLUMN lojas.pedidos_itens.envio_id IS 'Coluna com ID identificador do envio que a loja fez.';
 
