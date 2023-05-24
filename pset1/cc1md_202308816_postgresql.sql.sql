@@ -1,6 +1,7 @@
+CREATE USER Giovanni;
 CREATE DATABASE UVV;
 CREATE SCHEMA lojas;
-CREATE USER Giovanni;
+
 ALTER SCHEMA lojas OWNER TO Giovanni;
 CREATE TABLE lojas.produtos (
                 produto_id NUMERIC(38) NOT NULL,
