@@ -3,6 +3,7 @@ CREATE DATABASE UVV;
 CREATE SCHEMA lojas;
 
 ALTER SCHEMA lojas OWNER TO Giovanni;
+
 CREATE TABLE lojas.produtos (
     produto_id NUMERIC(38) NOT NULL,
     nome VARCHAR(255) NOT NULL,
@@ -13,46 +14,49 @@ CREATE TABLE lojas.produtos (
     imagem_arquivo VARCHAR(512),
     imagem_charset VARCHAR(512),
     imagem_ultima_atualizacao DATE,
-    CONSTRAINT produto_id PRIMARY KEY (produto_id)
+    CONSTRAINT produto_id_pk PRIMARY KEY (produto_id)
 );
 COMMENT ON TABLE lojas.produtos IS 'Tabela com as informações dos produtos, como nome e preço.';
 COMMENT ON COLUMN lojas.produtos.produto_id IS 'Coluna com o ID identificador dos produtos.';
 COMMENT ON COLUMN lojas.produtos.nome IS 'Coluna com os nomes dos produtos.';
 COMMENT ON COLUMN lojas.produtos.preco_unitario IS 'Coluna com o preço dos produtos.';
-COMMENT ON COLUMN lojas.detalhes IS 'Coluna com os detalhes dos produtos.';
+COMMENT ON COLUMN lojas.produtos.detalhes IS 'Coluna com os detalhes dos produtos.';
 COMMENT ON COLUMN lojas.produtos.imagem IS 'Coluna com as imagens dos produtos.';
 COMMENT ON COLUMN lojas.produtos.imagem_mime_type IS 'Coluna com identificador de mídia da imagem.';
-COMMENT ON COLUMN lojas.produtos.imagem_arquivo IS 'Coluna com os tipos de arquivos que a as imagens estão. ';
+COMMENT ON COLUMN lojas.produtos.imagem_arquivo IS 'Coluna com os tipos de arquivos que as imagens estão.';
 COMMENT ON COLUMN lojas.produtos.imagem_charset IS 'Coluna com o charset das imagens.';
-COMMENT ON COLUMN lojas.produtos.imagem_ultima_atualizacao IS 'Coluna com a data da ultima atualização da imagem do produto.';
-
+COMMENT ON COLUMN lojas.produtos.imagem_ultima_atualizacao IS 'Coluna com a data da última atualização da imagem do produto.';
 
 CREATE TABLE lojas.lojas (
-                loja_id NUMERIC(38) NOT NULL,
-                nome VARCHAR(255) NOT NULL,
-                endereco_web VARCHAR(100),
-                endereco_fisico VARCHAR(512),
-                latitude NUMERIC,
-                longitude NUMERIC,
-                logo BYTEA,
-                logo_mime_type VARCHAR(512),
-                logo_arquivo VARCHAR(512),
-                logo_charset VARCHAR(512),
-                logo_ultima_atualizacao DATE,
-                CONSTRAINT loja_id PRIMARY KEY (loja_id)
+    loja_id NUMERIC(38) NOT NULL,
+    nome VARCHAR(255) NOT NULL,
+    endereco_web VARCHAR(100),
+    endereco_fisico VARCHAR(512),
+    latitude NUMERIC,
+    longitude NUMERIC,
+    logo BYTEA,
+    logo_mime_type VARCHAR(512),
+    logo_arquivo VARCHAR(512),
+    logo_charset VARCHAR(512),
+    logo_ultima_atualizacao DATE,
+    CONSTRAINT loja_id_pk PRIMARY KEY (loja_id)
 );
-COMMENT ON TABLE lojas.lojas IS 'Tabela com informaçoes das lojas';
+COMMENT ON TABLE lojas.lojas IS 'Tabela com informações das lojas.';
 COMMENT ON COLUMN lojas.lojas.loja_id IS 'Coluna com o ID de identificação das lojas.';
 COMMENT ON COLUMN lojas.lojas.nome IS 'Coluna com o nome das lojas.';
-COMMENT ON COLUMN lojas.lojas.endereco_web IS 'Coluna com infomação do endereço de web da loja.';
+COMMENT ON COLUMN lojas.lojas.endereco_web IS 'Coluna com informação do endereço web da loja.';
 COMMENT ON COLUMN lojas.lojas.endereco_fisico IS 'Coluna com informações do endereço físico da loja.';
-COMMENT ON COLUMN lojas.sql.lojas.latitude IS 'Coluna com informação da posição de latitude da loja.';
+COMMENT ON COLUMN lojas.lojas.latitude IS 'Coluna com informação da posição de latitude da loja.';
 COMMENT ON COLUMN lojas.lojas.longitude IS 'Coluna com informação da posição de longitude da loja.';
 COMMENT ON COLUMN lojas.lojas.logo IS 'Coluna com a logo da loja.';
-COMMENT ON COLUMN lojas.lojas.logo_mime_type IS 'Coluna com a identificar da logo.';
+COMMENT ON COLUMN lojas.lojas.logo_mime_type IS 'Coluna com a identificação da logo.';
 COMMENT ON COLUMN lojas.lojas.logo_arquivo IS 'Coluna com o tipo de arquivo da logo.';
 COMMENT ON COLUMN lojas.lojas.logo_charset IS 'Coluna com o charset da logo.';
-COMMENT ON COLUMN lojas.lojas.logo_ultima_atualizacao IS 'Coluna com a data da ultima atualização da logo.';
+COMMENT ON COLUMN lojas.lojas.logo_ultima_atualizacao IS 'Coluna com a data da última atualização da logo.';
+
+CREATE TABLE lojas.estoques (
+    estoque_id NUMERIC(
+
 
 
 CREATE TABLE lojas.estoques (
