@@ -115,7 +115,7 @@ COMMENT ON COLUMN lojas.clientes.telefone3 IS 'Coluna com o terceiro número de 
                 CONSTRAINT envio_id PRIMARY KEY (envio_id)
                 CONSTRAINT fk_envios_lojas FOREIGN KEY (loja_id) REFERENCES lojas.lojas (loja_id) ON DELETE NO ACTION ON UPDATE NO ACTION,
                 CONSTRAINT fk_envios_clientes FOREIGN KEY (cliente_id) REFERENCES lojas.clientes (cliente_id) ON DELETE NO ACTION ON UPDATE NO ACTION,
-                CONSTRAINT chk_envios_status CHECK (status IN ('ENVIADO', 'ENTREGUE', 'DEVOLVIDO', 'CANCELADO'))
+                CONSTRAINT chk_envios_status CHECK (status IN ('ENVIADO', 'CRIADO', 'TRANSITO', 'ENTREGUE'))
 );
 COMMENT ON TABLE lojas.envios IS 'Tabela com as informações dos envios que as lojas fizeram para os clientes.';
 COMMENT ON COLUMN lojas.envios.envio_id IS 'Coluna com ID identificador do envio que a loja fez.';
@@ -131,8 +131,8 @@ COMMENT ON COLUMN lojas.envios.status_pedido IS 'Coluna com os status dos envios
                 cliente_id NUMERIC(38) NOT NULL,
                 status VARCHAR(15) NOT NULL,
                 loja_id NUMERIC(38) NOT NULL,
-                CONSTRAINT cliente_id PRIMARY KEY (pedido_id)
-                CONSTRAINT status_pedido CHECK (status IN ('COMPLETO','REEMBOLSADO','ESPERANDO_PAGAMENTO'))
+                CONSTRAINT cliente_id PRIMARY KEY (pedido_id),
+                CONSTRAINT status_pedido CHECK (status IN ('CANCELADO','COMPLETO','ABERTO','PAGO','REEMBOLSADO','ENVIADO'))
 );
 
 COMMENT ON TABLE lojas.pedidos IS 'Tabela com as informações dos pedidos dos clientes e das lojas utilizadas.';
@@ -223,4 +223,4 @@ ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
 
-               
+  
