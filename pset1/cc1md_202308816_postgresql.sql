@@ -5,7 +5,7 @@
  DROP USER giovanni
  
  -- Criação do usuário que irá manipular o banco de dados lojas--
- create  USER giovanni WITH
+ CREATE  USER giovanni WITH
  ENCRYPTED PASSWORD 'psete'
  CREATEDB CREATEROLE login;
 
