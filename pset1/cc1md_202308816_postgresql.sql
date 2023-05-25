@@ -2,7 +2,7 @@
 
  DROP SCHEMA lojas CASCADE;
  DROP DATABASE IF EXISTS uvv;
- DROP USER giovanni
+ DROP USER  IF EXISTS giovanni;
  
  -- Criação do usuário que irá manipular o banco de dados lojas--
  CREATE  USER giovanni WITH
