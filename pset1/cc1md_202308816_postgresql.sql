@@ -4,7 +4,7 @@
  DROP DATABASE IF EXISTS uvv;
  DROP USER  IF EXISTS giovanni;
  
- -- Criação do usuário que irá manipular o banco de dados lojas--
+ -- Criação do usuário que irá manipular o banco de dados uvv--
  CREATE  USER giovanni WITH
  ENCRYPTED PASSWORD 'psete'
  CREATEDB CREATEROLE login;
