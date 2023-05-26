@@ -112,8 +112,8 @@ COMMENT ON COLUMN lojas.clientes.telefone3 IS 'Coluna com o terceiro número de 
                 cliente_id NUMERIC(38) NOT NULL,
                 endereço_entrega VARCHAR(512) NOT NULL,
                 status VARCHAR(15) NOT NULL,
-                CONSTRAINT envio_id PRIMARY KEY (envio_id),
-                CONSTRAINT envios_pk PRIMARY KEY (envio_id),
+                 CONSTRAINT fk_envios_lojas FOREIGN KEY (loja_id) REFERENCES lojas.lojas (loja_id) ON DELETE NO ACTION ON UPDATE NO ACTION,
+                CONSTRAINT fk_envios_clientes FOREIGN KEY (cliente_id) REFERENCES lojas.clientes (cliente_id) ON DELETE NO ACTION ON UPDATE NO ACTION,
                 CONSTRAINT chk_envios_status CHECK (status IN ('ENVIADO', 'CRIADO', 'TRANSITO', 'ENTREGUE'))
 );
 COMMENT ON TABLE lojas.envios IS 'Tabela com as informações dos envios que as lojas fizeram para os clientes.';
