@@ -121,7 +121,7 @@ COMMENT ON COLUMN lojas.envios.envio_id IS 'Coluna com ID identificador do envio
 COMMENT ON COLUMN lojas.envios.loja_id IS 'Coluna com o ID de identificação das lojas.';
 COMMENT ON COLUMN lojas.envios.cliente_id IS 'Coluna que é a primary key da tabela, com o ID dos clientes da loja';
 COMMENT ON COLUMN lojas.envios.endereco_entrega IS 'Coluna com as informações dos endereços que devem ser entregues os pedidos.';
-COMMENT ON COLUMN lojas.envios.status_pedido IS 'Coluna com os status dos envios.';
+COMMENT ON COLUMN lojas.envios.status_envios IS 'Coluna com os status dos envios.';
 
  --Criação da tabela de pedidos com o comentário da tabela e das colunas--
  CREATE TABLE lojas.pedidos (
@@ -131,7 +131,7 @@ COMMENT ON COLUMN lojas.envios.status_pedido IS 'Coluna com os status dos envios
                 status_pedido VARCHAR(15) NOT NULL,
                 loja_id NUMERIC(38) NOT NULL,
                 CONSTRAINT cliente_id PRIMARY KEY (pedido_id),
-                CONSTRAINT status_pedido CHECK (status IN ('CANCELADO','COMPLETO','ABERTO','PAGO','REEMBOLSADO','ENVIADO'))
+                CONSTRAINT chk_status_pedido CHECK (status_pedido IN ('CANCELADO','COMPLETO','ABERTO','PAGO','REEMBOLSADO','ENVIADO'))
 );
 
 COMMENT ON TABLE lojas.pedidos IS 'Tabela com as informações dos pedidos dos clientes e das lojas utilizadas.';
