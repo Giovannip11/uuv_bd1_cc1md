@@ -112,7 +112,7 @@ COMMENT ON COLUMN lojas.clientes.telefone3 IS 'Coluna com o terceiro número de 
                 cliente_id NUMERIC(38) NOT NULL,
                 endereço_entrega VARCHAR(512) NOT NULL,
                 status VARCHAR(15) NOT NULL,
-                CONSTRAINT envio_id PRIMARY KEY (envio_id)
+                CONSTRAINT envio_id PRIMARY KEY (envio_id),
                 CONSTRAINT envios_pk PRIMARY KEY (envio_id),
                 CONSTRAINT chk_envios_status CHECK (status IN ('ENVIADO', 'CRIADO', 'TRANSITO', 'ENTREGUE'))
 );
