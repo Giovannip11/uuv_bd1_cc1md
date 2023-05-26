@@ -130,7 +130,7 @@ COMMENT ON COLUMN lojas.envios.status_envios IS 'Coluna com os status dos envios
                 cliente_id NUMERIC(38) NOT NULL,
                 status_pedido VARCHAR(15) NOT NULL,
                 loja_id NUMERIC(38) NOT NULL,
-                CONSTRAINT cliente_id PRIMARY KEY (pedido_id),
+                CONSTRAINT pedidos_pk PRIMARY KEY (pedido_id),
                 CONSTRAINT chk_status_pedido CHECK (status_pedido IN ('CANCELADO','COMPLETO','ABERTO','PAGO','REEMBOLSADO','ENVIADO'))
 );
 
@@ -218,6 +218,12 @@ NOT DEFERRABLE;
 ALTER TABLE lojas.pedidos_itens ADD CONSTRAINT pedidos_pedidos_itens_fk
 FOREIGN KEY (pedido_id)
 REFERENCES lojas.pedidos (pedido_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+ALTER TABLE lojas.pedidos ADD CONSTRAINT lojas_padidos_FK
+FOREIGN KEy (loja_id)
+REFERENCES lojas.lojas (loja_id)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
