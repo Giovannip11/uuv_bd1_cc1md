@@ -1,4 +1,4 @@
---Este é o script do Pset1, feito por Giovanni Milan Câmara Pinto da turma cc1md.--
+---Este é o script do Pset1, feito por Giovanni Milan Câmara Pinto da turma cc1md.--
 
 
 -- Apagando SCHEMAS criados com o mesmo nome caso existam / Banco de dados com mesmo nome caso existam / usuários com mesmo nome caso existam--
