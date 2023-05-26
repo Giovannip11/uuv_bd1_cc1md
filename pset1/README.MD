@@ -3,7 +3,7 @@
 - Turma:CC1MD
 - email:giggiopinto@gmail.com
 - PROFESSOR:Abrantes Araujo Silva Filho
-- MONITORA:
+- MONITORA:Sullen Miranda Amorim
 ## Descrição:
 PESET é uma atividade pontuada com questões e projetos envolvendo a construção de Banco de Dados.
 ## pset1
