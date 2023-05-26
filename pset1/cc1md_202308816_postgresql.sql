@@ -148,7 +148,7 @@ COMMENT ON COLUMN lojas.pedidos.loja_id IS 'Coluna com o ID de identificação d
                 preco_unitario NUMERIC(10,2) NOT NULL,
                 quantidade NUMERIC(38) NOT NULL,
                 envio_id NUMERIC(38) NOT NULL,
-                CONSTRAINT pedido_id PRIMARY KEY (pedido_id, produto_id)
+                CONSTRAINT pedido_id PRIMARY KEY ( produto_id)
 );
 COMMENT ON TABLE lojas.pedidos_itens IS 'Tabela com os pedidos dos itens.';
 COMMENT ON COLUMN lojas.pedidos_itens.pedido_id IS 'Primary key da coluna, com objetivo de identificar o ID do pedido.';
