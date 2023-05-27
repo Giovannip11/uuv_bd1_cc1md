@@ -20,7 +20,7 @@
   LC_COLLATE = 'pt_BR.UTF-8'
   LC_CTYPE = 'pt_BR.UTF-8'
   ALLOW_CONNECTIONS = true;
- 
+ --Conexão para utilizar o banco de dados uvv--
   \c "host=localhost dbname=uvv user=giovanni password=psete"
   
  --Criação da SCHEMA e alterando ela para o OWNER giovanni--
